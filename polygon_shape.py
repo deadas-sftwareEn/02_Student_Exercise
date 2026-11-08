@@ -41,39 +41,3 @@ class Polygon:
 colors = ["cyan", "turquoise", "orange", "yellowgreen", "deepskyblue",
           "salmon", "plum", "lightgreen", "gold", "pink", "white"]
 
-screen = turtle.Screen()
-screen.bgcolor("black")
-screen.setup(850, 600)
-screen.tracer(0)
-
-rng = random.Random(17)
-shapes = []
-polygons = []  
-
-for _ in range(30):
-    sides = rng.randint(3, 6)
-    side_length = rng.randint(35, 120)
-    x = rng.randint(-350, 260)
-    y = rng.randint(-225, 180)
-    
-    color = rng.choice(colors)
-    pen_size = rng.randint(1, 7)
-    angle = rng.randint(0, 359)
-    
-    polygon = Polygon(x, y, sides, side_length, color, pen_size, angle)
-    polygon.move_to(x, y)
-    polygons.append(polygon)
-    
-    shapes.append((polygon, x, y, rng.random() * 6.28))
-
-frame = 0
-while True:
-    for shape, home_x, home_y, phase in shapes:
-        x = home_x + 32 * math.cos(frame * 0.07 + phase)
-        y = home_y + 23 * math.sin(frame * 0.07 + phase)
-        shape.move_to(x, y)  
-    screen.update()
-    time.sleep(0.045) 
-    frame += 1
-
-screen.mainloop()
